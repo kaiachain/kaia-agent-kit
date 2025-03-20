@@ -1,0 +1,31 @@
+name: "SDK publish on release"
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+    branches:
+      - test-cicd
+jobs:
+  deploy:
+    permissions:
+      id-token: write
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+
+      - name: Build and publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          npx pnpm --filter "@kaiachain/*" -r publish --publish-branch main --no-git-check --access=public
