@@ -26,5 +26,5 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          pnpm install && pnpm build
+          npx pnpm install && npx pnpm build
           npx pnpm --filter "@kaiachain/*" -r publish --publish-branch main --no-git-check --access=public
