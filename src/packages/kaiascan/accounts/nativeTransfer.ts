@@ -18,12 +18,12 @@ export const nativeTransfer = async (
   validations.checkAddress(address);
   validations.checkNetwork(network);
 
-  const transactionHash = await walletClient.sendTransaction({
+  const txnResult = await walletClient.sendTransaction({
     account: walletClient.account,
     to: address,
     value: parseEther(amount.toString()),
   });
 
-  let responseText = `Successfully transferred ${amount} KAIA on ${address} to ${address}. \nTransaction Hash: ${transactionHash}`;
+  let responseText = `Successfully transferred ${amount} KAIA to ${address}. \nTransaction Hash: ${txnResult.hash}`;
   return responseText;
 };

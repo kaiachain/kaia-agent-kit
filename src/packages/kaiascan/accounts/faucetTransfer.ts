@@ -16,12 +16,12 @@ export const faucetTransfer = async (
   validations.checkAddress(address);
   validations.checkNetwork(network);
 
-  const transactionHash = await walletClient.sendTransaction({
+  const txnResult = await walletClient.sendTransaction({
     account: walletClient.account,
     to: address,
     value: parseEther(KAIROS_FAUCET_AMOUNT),
   });
 
-  let responseText = `Successfully transferred ${KAIROS_FAUCET_AMOUNT} test tokens to ${address}. \nTransaction Hash: ${transactionHash}`;
+  let responseText = `Successfully transferred ${KAIROS_FAUCET_AMOUNT} test tokens to ${address}. \nTransaction Hash: ${txnResult.hash}`;
   return responseText;
 };

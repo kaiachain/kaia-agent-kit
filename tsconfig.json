@@ -1,8 +1,8 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
-        "module": "es2020",
-        "target": "ES2022",
+        "module": "esnext",
+        "target": "es2017",
         "moduleResolution": "node",
         "strict": true,
         "esModuleInterop": true,
@@ -14,7 +14,7 @@
         "outDir": "dist",
         "noEmitOnError": true,
         "forceConsistentCasingInFileNames": true,
-        "lib": ["DOM", "ES6"],
+        "lib": ["dom", "esnext"],
         "noErrorTruncation": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true

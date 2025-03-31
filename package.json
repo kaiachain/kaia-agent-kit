@@ -1,17 +1,51 @@
 {
   "name": "kaia-agent-kit",
-  "version": "0.0.1",
-  "description": "",
-  "main": "dist/index.js",
+  "version": "0.0.2",
+  "description": "One stop solution for all Kaia Ecosystem projects",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsup",
+    "clean": "rm -rf dist",
+    "test": "vitest run --passWithNoTests"
   },
-  "author": "",
-  "license": "ISC",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "dependencies": {
-    "ts-node": "^10.9.2",
+    "@goat-sdk/core": "0.4.9",
+    "@goat-sdk/wallet-evm": "0.2.11",
     "viem": "^2.23.15",
     "zod": "^3.24.2"
-  }
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "tsup": "^7.2.0",
+    "tsx": "4.19.2",
+    "turbo": "2.3.1"
+  },
+  "homepage": "https://kaia.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaiachain/kaia-agent-kit.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kaiachain/kaia-agent-kit/issues"
+  },
+  "keywords": [
+    "kaia",
+    "agent",
+    "sdk",
+    "typescript",
+    "nodejs",
+    "kaia-agent-kit",
+    "web3",
+    "layer1"
+  ],
+  "packageManager": "pnpm@9.14.2"
 }
