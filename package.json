@@ -1,6 +1,6 @@
 {
-  "name": "kaia-agent-kit",
-  "version": "0.0.3",
+  "name": "@kaiachain/kaia-agent-kit",
+  "version": "0.0.4",
   "description": "One stop solution for all Kaia Ecosystem projects",
   "files": [
     "dist/**/*",
