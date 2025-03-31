@@ -24,7 +24,7 @@ Follow these steps to set up the Kaia Agent Kit in your project:
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/kaia-agent-kit.git
+    git clone https://github.com/kaiachain/kaia-agent-kit.git
     cd kaia-agent-kit
     ```
 
