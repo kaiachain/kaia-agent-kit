@@ -10,6 +10,8 @@ export const nativeTransfer = async (
   if (parameters.amount) {
     if (amount < 0) {
       throw new Error("Amount cannot be negative");
+    } else {
+      amount = parameters.amount;
     }
   }
   let { address, network } = parameters;
