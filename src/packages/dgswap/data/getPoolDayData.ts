@@ -1,4 +1,4 @@
-import {queryGql} from "../utils/gql";
+import {queryGql} from "../utils/gql.js";
 
 const GET_POOL_DAY_DATA = `
 query PoolDayDatas(

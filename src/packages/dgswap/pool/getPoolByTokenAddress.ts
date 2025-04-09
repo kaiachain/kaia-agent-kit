@@ -1,4 +1,4 @@
-import {queryGql} from "../utils/gql";
+import {queryGql} from "../utils/gql.js";
 
 const GET_POOLS = `
   query GetPools($token0Address: String!, $token1Address: String!) {
