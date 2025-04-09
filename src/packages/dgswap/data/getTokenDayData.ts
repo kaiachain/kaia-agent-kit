@@ -26,7 +26,6 @@ query PoolDayDatas(
 
 export const getTokenDayData = async (tokenAddress: `0x${string}`, count: number) => {
     // Validate input addresses if needed
-    const tokenDayDatas = await queryGql(GET_POOL_DAY_DATA, {tokenAddress, count});
-    console.log(tokenDayDatas)
+    const {tokenDayDatas = []} = await queryGql(GET_POOL_DAY_DATA, {tokenAddress, count});
     return tokenDayDatas;
 };
