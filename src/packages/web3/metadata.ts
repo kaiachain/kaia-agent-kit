@@ -11,7 +11,10 @@ metadata.transferErc20 = {
         amount: z.union([z.string(), z.bigint(), z.number()]),
         contractAddress: z.string(),
         network: z.enum(['kaia', 'kairos'])
-    })
+    }),
+    similes: ["transfer_erc20"],
+    validate: async () => true,
+    examples: [],
 }
 
 metadata.transferErc721 = {
@@ -23,7 +26,10 @@ metadata.transferErc721 = {
         tokenId: z.string(),
         contractAddress: z.string(),
         network: z.enum(['kaia', 'kairos'])
-    })
+    }),
+    similes: ["transfer_erc721"],
+    validate: async () => true,
+    examples: [],
 };
 
 metadata.transferErc1155 = {
@@ -36,7 +42,10 @@ metadata.transferErc1155 = {
         tokenId: z.string(),
         contractAddress: z.string(),
         network: z.enum(['kaia', 'kairos'])
-    })
+    }),
+    similes: ["transfer_erc1155"],
+    validate: async () => true,
+    examples: [],
 };
 
 metadata.transferNativeToken = {
@@ -47,7 +56,10 @@ metadata.transferNativeToken = {
         receiver: z.string(),
         amount: z.union([z.string(), z.bigint(), z.number()]),
         network: z.enum(['kaia', 'kairos'])
-    })
+    }),
+    similes: ["transfer_native_token"],
+    validate: async () => true,
+    examples: [],
 };
 
 export default metadata;

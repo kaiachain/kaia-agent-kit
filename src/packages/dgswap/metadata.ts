@@ -8,7 +8,10 @@ metadata.getCurrentBalance = {
     params: z.object({
         address: z.string(),
         network: z.string()
-    })
+    }),
+    similes: ["get_current_balance"],
+    validate: async () => true,
+    examples: [],
 }
 
 export default metadata;
