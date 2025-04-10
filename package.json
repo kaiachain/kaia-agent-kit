@@ -19,6 +19,7 @@
   "dependencies": {
     "@goat-sdk/core": "0.4.9",
     "@goat-sdk/wallet-evm": "0.2.11",
+    "@kaiachain/ethers-ext": "^2.0.3",
     "viem": "^2.23.15",
     "zod": "^3.24.2"
   },
@@ -46,6 +47,5 @@
     "kaia-agent-kit",
     "web3",
     "layer1"
-  ],
-  "packageManager": "pnpm@9.14.2"
+  ]
 }
