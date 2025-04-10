@@ -1,5 +1,5 @@
-import { API_DEFAULTS } from "../../../utils/constants";
-import validations from "../utils/validations";
+import { API_DEFAULTS } from "../../../../utils/constants";
+import validations from "../../utils/validations";
 
 export const getCurrentBalance = async (parameters: any, config: any) => {
   try {

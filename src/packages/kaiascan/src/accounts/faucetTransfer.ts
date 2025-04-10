@@ -1,4 +1,4 @@
-import validations from "../utils/validations";
+import validations from "../../utils/validations";
 import { parseEther } from "viem";
 
 const DEFAULT_KAIROS_FAUCET_AMOUNT = "1"; // in KAIA

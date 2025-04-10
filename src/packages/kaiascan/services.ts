@@ -1,13 +1,13 @@
-export * from "./accounts/faucetTransfer";
-export * from "./accounts/getAccountOverview";
-export * from "./accounts/getCurrentBalance";
-export * from "./accounts/getFTBalance";
-export * from "./accounts/getNFTBalance";
-export * from "./accounts/nativeTransfer";
+export * from "./src/accounts/faucetTransfer";
+export * from "./src/accounts/getAccountOverview";
+export * from "./src/accounts/getCurrentBalance";
+export * from "./src/accounts/getFTBalance";
+export * from "./src/accounts/getNFTBalance";
+export * from "./src/accounts/nativeTransfer";
 
-export * from "./kaiainfo/getKaiaInfo";
+export * from "./src/kaiainfo/getKaiaInfo";
 
-export * from "./transactions/getBlockInfo";
-export * from "./transactions/getLatestBlock";
-export * from "./transactions/getTransactionsByAccount";
-export * from "./transactions/getTransactionsByBlockNumber";
+export * from "./src/transactions/getBlockInfo";
+export * from "./src/transactions/getLatestBlock";
+export * from "./src/transactions/getTransactionsByAccount";
+export * from "./src/transactions/getTransactionsByBlockNumber";

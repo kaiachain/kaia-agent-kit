@@ -1,13 +1,27 @@
 import {z} from 'zod';
 
+import {  faucetExamples } from "./examples/faucet";
+import {  getAccountOverviewExamples } from "./examples/getAccountOverview";
+import {  getBlockExamples } from "./examples/getBlock";
+import {  getCurrentBalanceExamples } from "./examples/getCurrentBalance";
+import {  getFTBalanceDetailsExamples } from "./examples/getFTBalanceDetails";
+import {  getKaiaInfoExamples } from "./examples/getKaiaInfo";
+import {  getLatestBlockExamples } from "./examples/getLatestBlock";
+import {  getNFTBalanceExamples } from "./examples/getNFTBalance";
+import {  getTransactionsByAccountExamples } from "./examples/getTransactionsByAccount";
+import {  getTransactionsByBlockExamples } from "./examples/getTransactionsByBlock";
+import {  transferExamples } from "./examples/transfer";
 
-
+/* Function names are same as the function names in the services.ts file */
 export const faucetTransfer = {
     name: 'get_faucet_tokens',
     description: 'Get some test tokens for a given address',
     params: z.object({
         address: z.string()
-    })
+    }),
+    similes: ["get_faucet_tokens"],
+    validate: async () => true,
+    examples: faucetExamples
 }
 
 export const getAccountOverview = {
@@ -16,7 +30,10 @@ export const getAccountOverview = {
     params: z.object({
         address: z.string(),
         network: z.string()
-    })
+    }),
+    similes: ["get_account_overview"],
+    validate: async () => true,
+    examples: getAccountOverviewExamples
 }
 
 export const getCurrentBalance = {
@@ -25,7 +42,10 @@ export const getCurrentBalance = {
     params: z.object({
         address: z.string(),
         network: z.string()
-    })
+    }),
+    similes: ["get_current_balance"],
+    validate: async () => true,
+    examples: getCurrentBalanceExamples,
 }
 
 export const getFTBalance = {
@@ -34,7 +54,10 @@ export const getFTBalance = {
     params: z.object({
         address: z.string(),
         network: z.string()
-    })
+    }),
+    similes: ["get_ft_balance"],
+    validate: async () => true,
+    examples: getFTBalanceDetailsExamples,
 }
 
 export const getNFTBalance = {
@@ -43,7 +66,10 @@ export const getNFTBalance = {
     params: z.object({
         address: z.string(),
         network: z.string()
-    })
+    }),
+    similes: ["get_nft_balance_details"],
+    validate: async () => true,
+    examples: getNFTBalanceExamples,
 }
 
 export const nativeTransfer = {
@@ -53,13 +79,19 @@ export const nativeTransfer = {
         address: z.string(),
         amount: z.number(),
         network: z.string()
-    })
+    }),
+    similes: ["native_transfer"],
+    validate: async () => true,
+    examples: transferExamples,
 }
 
 export const getKaiaInfo = {
     name: 'get_kaia_info',
     description: 'Get the kaia current info or kaia overview about Kaia Token or gets current kaia price',
-    params: z.object({})
+    params: z.object({}),
+    similes: ["get_kaia_info"],
+    validate: async () => true,
+    examples: getKaiaInfoExamples,
 }
 
 export const getBlockInfo = {
@@ -68,7 +100,10 @@ export const getBlockInfo = {
     params: z.object({
         blockNumber: z.number(),
         network: z.string()
-    })
+    }),
+    similes: ["get_block_info"],
+    validate: async () => true,
+    examples: getBlockExamples,
 }
 
 export const getLatestBlock = {
@@ -76,7 +111,10 @@ export const getLatestBlock = {
     description: 'Get the latest block number or block height for a given network (kaia or kairos)',
     params: z.object({
         network: z.string()
-    })
+    }),
+    similes: ["get_latest_block"],
+    validate: async () => true,
+    examples: getLatestBlockExamples,
 }
 
 export const getTransactionsByAccount = {
@@ -85,7 +123,10 @@ export const getTransactionsByAccount = {
     params: z.object({
         address: z.string(),
         network: z.string()
-    })
+    }),
+    similes: ["get_transactions_by_account"],
+    validate: async () => true,
+    examples: getTransactionsByAccountExamples,
 }
 
 export const getTransactionsByBlockNumber = {
@@ -94,5 +135,8 @@ export const getTransactionsByBlockNumber = {
     params: z.object({
         blockNumber: z.number(),
         network: z.string()
-    })
+    }),
+    similes: ["get_transactions_by_block_number"],
+    validate: async () => true,
+    examples: getTransactionsByBlockExamples,
 }
