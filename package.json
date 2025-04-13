@@ -10,7 +10,8 @@
   "scripts": {
     "build": "tsup",
     "clean": "rm -rf dist",
-    "test": "vitest run --passWithNoTests"
+    "test": "vitest run --passWithNoTests",
+    "testExample": "tsx examples/test.ts"
   },
   "sideEffects": false,
   "main": "./dist/index.js",

@@ -1,9 +1,7 @@
-export * from "./src/accounts/faucetTransfer";
 export * from "./src/accounts/getAccountOverview";
 export * from "./src/accounts/getCurrentBalance";
 export * from "./src/accounts/getFTBalance";
 export * from "./src/accounts/getNFTBalance";
-export * from "./src/accounts/nativeTransfer";
 
 export * from "./src/kaiainfo/getKaiaInfo";
 

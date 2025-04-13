@@ -1,6 +1,5 @@
 import {z} from 'zod';
 
-import {  faucetExamples } from "./examples/faucet";
 import {  getAccountOverviewExamples } from "./examples/getAccountOverview";
 import {  getBlockExamples } from "./examples/getBlock";
 import {  getCurrentBalanceExamples } from "./examples/getCurrentBalance";
@@ -13,16 +12,6 @@ import {  getTransactionsByBlockExamples } from "./examples/getTransactionsByBlo
 import {  transferExamples } from "./examples/transfer";
 
 /* Function names are same as the function names in the services.ts file */
-export const faucetTransfer = {
-    name: 'get_faucet_tokens',
-    description: 'Get some test tokens for a given address',
-    params: z.object({
-        address: z.string()
-    }),
-    similes: ["get_faucet_tokens"],
-    validate: async () => true,
-    examples: faucetExamples
-}
 
 export const getAccountOverview = {
     name: 'get_account_overview',

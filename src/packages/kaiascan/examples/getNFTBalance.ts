@@ -1,6 +1,4 @@
-import type { ActionExample } from "@elizaos/core";
-
-export const getNFTBalanceExamples: ActionExample[][] = [
+export const getNFTBalanceExamples = [
     [
         {
             user: "{{user1}}",

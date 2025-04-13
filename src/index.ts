@@ -1,11 +1,18 @@
 import * as Kaiascan from './packages/kaiascan';
 import * as Web3 from './packages/web3';
 import * as DgSwap from './packages/dgswap'
+
+export enum PackagesEnum {
+  KAIASCAN = 'kaiascan',
+  WEB3 = 'web3',
+  DGSWAP = 'dgSwap'
+}
+
 export const Packages = {
-  kaiascan: Kaiascan,
-  web3: Web3,
-  dgSwap: DgSwap
+  [PackagesEnum.KAIASCAN]: Kaiascan,
+  [PackagesEnum.WEB3]: Web3,
+  [PackagesEnum.DGSWAP]: DgSwap
 };
 
-export { KaiaPlugin, Kaia } from "./kaia.plugin";
+export { Kaia, KaiaPlugin } from "./kaia.plugin";
 

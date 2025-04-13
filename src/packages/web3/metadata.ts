@@ -1,8 +1,19 @@
 import {z} from 'zod';
+import { faucetExamples } from './examples/faucet';
+import { transferExamples } from './examples/transfer';
 
-let metadata: any = {};
+export const faucetTransfer = {
+    name: 'transfer_test_kaia_coins',
+    description: 'transfer test kaia coins for a given address',
+    params: z.object({
+        address: z.string()
+    }),
+    similes: ["transfer_test_kaia_coins"],
+    validate: async () => true,
+    examples: faucetExamples
+}
 
-metadata.transferErc20 = {
+export const transferErc20 = {
     name: 'transfer_erc20',
     description: 'transfer erc20 token',
     params: z.object({
@@ -17,7 +28,7 @@ metadata.transferErc20 = {
     examples: [],
 }
 
-metadata.transferErc721 = {
+export const transferErc721 = {
     name: 'transfer_erc721',
     description: 'transfer erc721 token',
     params: z.object({
@@ -32,7 +43,7 @@ metadata.transferErc721 = {
     examples: [],
 };
 
-metadata.transferErc1155 = {
+export const transferErc1155 = {
     name: 'transfer_erc1155',
     description: 'transfer erc1155 token',
     params: z.object({
@@ -48,7 +59,7 @@ metadata.transferErc1155 = {
     examples: [],
 };
 
-metadata.transferNativeToken = {
+export const transferNativeToken = {
     name: 'transfer_native_token',
     description: 'transfer native token',
     params: z.object({
@@ -59,7 +70,5 @@ metadata.transferNativeToken = {
     }),
     similes: ["transfer_native_token"],
     validate: async () => true,
-    examples: [],
+    examples: [transferExamples],
 };
-
-export default metadata;

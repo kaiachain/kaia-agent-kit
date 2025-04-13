@@ -1,6 +1,4 @@
-import type { ActionExample } from "@elizaos/core";
-
-export const getKaiaInfoExamples: ActionExample[][] = [
+export const getKaiaInfoExamples = [
     [
         {
             user: "{{user1}}",

@@ -1,6 +1,4 @@
-import type { ActionExample } from "@elizaos/core";
-
-export const getLatestBlockExamples: ActionExample[][] = [
+export const getLatestBlockExamples = [
     [
         {
             user: "{{user1}}",

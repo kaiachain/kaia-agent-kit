@@ -3,26 +3,19 @@ import { Packages } from "../src/index";
 import { http, createWalletClient } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { kairos, kaia } from "viem/chains";
+import { isKlaytnAccountKeyType, JsonRpcProvider, TxType, Wallet } from "@kaiachain/ethers-ext";
+const client = new JsonRpcProvider(kairos.rpcUrls.default.http[0])
+const wallet = new Wallet("0x-your-private-key", client)
 
-const account = privateKeyToAccount(
-  "0xyour-private-key"
-);
-
-const walletClient = createWalletClient({
-  account: account,
-  transport: http("https://public-en-kairos.node.kaia.io"),
-  chain: kairos,
-});
-
-Packages.kaiascan.Services.faucetTransfer(
+Packages.web3.Services.transferFaucet(
   {
-    address:
+    receiver:
       "0xe45CEA5135167451e16175f7B58E9912CF1d8b63",
   },
   {
     KAIROS_FAUCET_AMOUNT: "1",
   },
-  walletClient
+  wallet
 ).then((hash: any) => {
   console.log(hash);
 });

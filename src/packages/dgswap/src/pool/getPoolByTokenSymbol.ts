@@ -1,4 +1,4 @@
-import {queryGql} from "../utils/gql.js";
+import { queryGql } from "../../utils/gql.js";
 
 const GET_POOLS = `
   query GetPools($symbol0: String!, $symbol1: String!) {
@@ -33,10 +33,13 @@ const GET_POOLS = `
   }
 `;
 
-export const getPoolByTokenSymbol = async (symbol0: string, symbol1: string) => {
-  const {  pools = []  } = await queryGql(GET_POOLS,{symbol0,symbol1})
+export const getPoolByTokenSymbol = async (
+  symbol0: string,
+  symbol1: string
+) => {
+  const { pools = [] } = await queryGql(GET_POOLS, { symbol0, symbol1 });
   if (pools.length === 0) {
-    throw new Error("No pool found")
+    throw new Error("No pool found");
   }
   return pools[0];
 };

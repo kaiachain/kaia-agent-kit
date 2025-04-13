@@ -1,6 +1,4 @@
-import type { ActionExample } from "@elizaos/core";
-
-export const getCurrentBalanceExamples: ActionExample[][] = [
+export const getCurrentBalanceExamples = [
     [
         {
             user: "{{user1}}",

@@ -1,6 +1,6 @@
 import { Chain, PluginBase, ToolBase, createTool } from "@goat-sdk/core";
 import { EVMWalletClient } from "@goat-sdk/wallet-evm";
-import { Packages } from "./index";
+import { Packages, PackagesEnum } from "./index";
 
 export class KaiaPlugin extends PluginBase<EVMWalletClient> {
   private config: Record<string, unknown>;
@@ -18,8 +18,16 @@ export class KaiaPlugin extends PluginBase<EVMWalletClient> {
   getTools(walletClient: EVMWalletClient) {
     const tools: ToolBase[] | Promise<ToolBase[]> = [];
     const config = this.config;
+    const packagesEnabled: PackagesEnum[] = (config.packages ||
+      []) as PackagesEnum[];
 
-    for (const pkg of Object.values(Packages)) {
+    for (const [pkgName, pkg] of Object.entries(Packages)) {
+      if (
+        packagesEnabled.length > 0 &&
+        !packagesEnabled.includes(pkgName as PackagesEnum)
+      ) {
+        continue;
+      }
       const services =
         (pkg as { Services?: Record<string, unknown> }).Services || {};
       const metadata: any = pkg.Metadata || {};

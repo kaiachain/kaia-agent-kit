@@ -1,5 +1,5 @@
-import { API_DEFAULTS } from "../../../utils/constants";
-import validations from "../utils/validations";
+import { API_DEFAULTS } from "../../../../utils/constants";
+import validations from "../../utils/validations";
 
 export const getKaiaInfo = async (parameters: any, config: any) => {
   let KAIA_KAIASCAN_API_KEY = config.KAIA_KAIASCAN_API_KEY;

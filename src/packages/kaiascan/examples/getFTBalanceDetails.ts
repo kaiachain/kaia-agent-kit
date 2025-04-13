@@ -1,6 +1,4 @@
-import type { ActionExample } from "@elizaos/core";
-
-export const getFTBalanceDetailsExamples: ActionExample[][] = [
+export const getFTBalanceDetailsExamples = [
     [
         {
             user: "{{user1}}",

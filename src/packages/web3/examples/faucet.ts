@@ -1,6 +1,4 @@
-import type { ActionExample } from "@elizaos/core";
-
-export const faucetExamples: ActionExample[][] = [
+export const faucetExamples = [
     [
         {
             user: "user",

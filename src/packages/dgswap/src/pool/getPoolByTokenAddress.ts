@@ -1,4 +1,4 @@
-import {queryGql} from "../utils/gql.js";
+import { queryGql } from "../../utils/gql.js";
 
 const GET_POOLS = `
   query GetPools($token0Address: String!, $token1Address: String!) {
@@ -33,9 +33,15 @@ const GET_POOLS = `
   }
 `;
 
-export const getPoolByTokenAddress = async (token0Address: `0x${string}`, token1Address: `0x${string}`) => {
+export const getPoolByTokenAddress = async (
+  token0Address: `0x${string}`,
+  token1Address: `0x${string}`
+) => {
   // Validate input addresses if needed
-  const {  pools = []  } = await queryGql(GET_POOLS,{token0Address,token1Address});
+  const { pools = [] } = await queryGql(GET_POOLS, {
+    token0Address,
+    token1Address,
+  });
   if (pools.length === 0) {
     throw new Error("No pool found");
   }
