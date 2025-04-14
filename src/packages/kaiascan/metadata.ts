@@ -9,7 +9,6 @@ import {  getLatestBlockExamples } from "./examples/getLatestBlock";
 import {  getNFTBalanceExamples } from "./examples/getNFTBalance";
 import {  getTransactionsByAccountExamples } from "./examples/getTransactionsByAccount";
 import {  getTransactionsByBlockExamples } from "./examples/getTransactionsByBlock";
-import {  transferExamples } from "./examples/transfer";
 
 /* Function names are same as the function names in the services.ts file */
 
@@ -59,19 +58,6 @@ export const getNFTBalance = {
     similes: ["get_nft_balance_details"],
     validate: async () => true,
     examples: getNFTBalanceExamples,
-}
-
-export const nativeTransfer = {
-    name: 'native_transfer',
-    description: 'Transfer native token KAIA to a given address, amount in KAIA and network (kaia or kairos)',
-    params: z.object({
-        address: z.string(),
-        amount: z.number(),
-        network: z.string()
-    }),
-    similes: ["native_transfer"],
-    validate: async () => true,
-    examples: transferExamples,
 }
 
 export const getKaiaInfo = {
