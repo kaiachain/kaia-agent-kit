@@ -9,6 +9,14 @@ The Kaia Agent Kit is a comprehensive toolkit designed to help developers build,
 - Comprehensive documentation and examples
 - Scalable and efficient deployment options
 
+# Plugins Available
+
+| Plugin | Description | Features Available |
+|--------|-------------|--------------------|
+| dgswap | Contains DGswap tokens and pools information |`get_pool_by_token_symbol`, `get_pool_by_token_address`, `get_pool_day_data`, `get_token_day_data`|
+| web3 | Contains on-chain transfer functions for tokens and native assets |`transfer_erc20`, `transfer_erc721`, `transfer_erc1155`, `transfer_native_token`, `transfer_faucet`|
+| kaiascan | Provides Kaia price, balances, transactions, and block information |`get_account_overview`, `get_current_balance`, `get_ft_balance`, `get_nft_balance`, `get_kaia_info`, `get_block_info`, `get_latest_block`, `get_transactions_by_account`, `get_transactions_by_block_number`|
+
 ## Setup Guide
 
 Follow these steps to set up the Kaia Agent Kit in your project:
