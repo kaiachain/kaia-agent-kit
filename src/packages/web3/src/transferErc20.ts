@@ -2,6 +2,7 @@ import { AbiFactory, TokenTransferPayload } from "../utils/token.js";
 import { isKlaytnAccountKeyType, TxType } from "@kaiachain/ethers-ext";
 import { keccak256 } from "viem";
 import { getAccount } from "../utils/helper";
+
 async function getContractDecimals(contractAddress: string, walletClient: any) {
   // Step 1: Get the Keccak-256 hash of the function signature
   const functionSignature = new TextEncoder().encode("decimals()");

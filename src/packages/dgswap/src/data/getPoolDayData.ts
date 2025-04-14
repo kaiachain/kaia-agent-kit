@@ -21,7 +21,8 @@ query PoolDayDatas(
   }
 }`
 
-export const getPoolDayData = async (poolAddress: `0x${string}`, count: number) => {
+export const getPoolDayData = async (parameters: any) => {
+    const { poolAddress, count } = parameters;
     // Validate input addresses if needed
     const {poolDayDatas = []} = await queryGql(GET_POOL_DAY_DATA, {poolAddress, count});
     return poolDayDatas;

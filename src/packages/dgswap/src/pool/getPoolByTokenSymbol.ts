@@ -34,10 +34,9 @@ const GET_POOLS = `
 `;
 
 export const getPoolByTokenSymbol = async (
-  symbol0: string,
-  symbol1: string
+  parameters: any
 ) => {
-  console.log(symbol0, symbol1);
+  const { symbol0, symbol1 } = parameters;
   const { pools = [] } = await queryGql(GET_POOLS, { symbol0, symbol1 });
   if (pools.length === 0) {
     throw new Error("No pool found");

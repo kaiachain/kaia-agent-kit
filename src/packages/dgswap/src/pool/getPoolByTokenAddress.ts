@@ -34,10 +34,10 @@ const GET_POOLS = `
 `;
 
 export const getPoolByTokenAddress = async (
-  token0Address: `0x${string}`,
-  token1Address: `0x${string}`
+  parameters: any
 ) => {
   // Validate input addresses if needed
+  const { token0Address, token1Address } = parameters;
   const { pools = [] } = await queryGql(GET_POOLS, {
     token0Address,
     token1Address,

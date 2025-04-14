@@ -25,9 +25,9 @@ query tokenDayDatas(
 }`;
 
 export const getTokenDayData = async (
-  tokenAddress: `0x${string}`,
-  count: number
+  parameters: any
 ) => {
+  const { tokenAddress, count } = parameters;
   // Validate input addresses if needed
   const { tokenDayDatas = [] } = await queryGql(GET_TOKEN_DAY_DATA, {
     tokenAddress,
