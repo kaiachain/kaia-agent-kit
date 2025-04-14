@@ -10,6 +10,7 @@ export const transferFaucet = async (
   config: any,
   walletClient: any
 ) => {
+  console.log(parameters, config, walletClient);
   let KAIROS_FAUCET_AMOUNT =
     config.KAIROS_FAUCET_AMOUNT || DEFAULT_KAIROS_FAUCET_AMOUNT;
 
