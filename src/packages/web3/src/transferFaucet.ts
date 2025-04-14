@@ -20,7 +20,7 @@ export const transferFaucet = async (
     walletClient,
     sender
   );
-
+  parameters.sender = sender;
   validations.checkAddress(sender);
   validations.checkAddress(parameters.receiver);
 

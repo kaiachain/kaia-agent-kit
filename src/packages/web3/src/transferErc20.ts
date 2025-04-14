@@ -37,14 +37,14 @@ export const transferErc20 = async (
     walletClient,
     sender
   );
-
+  parameters.sender = sender;
   parameters.amount = await getContractDecimals(
     parameters.contractAddress,
     walletClient
   );
 
   const res: any = {
-    from: parameters.sender,
+    from: sender,
     to: parameters.contractAddress,
     data: new AbiFactory({
       ...(parameters as Partial<TokenTransferPayload>),

@@ -16,7 +16,7 @@ export const transferNativeToken = async (
     walletClient,
     sender
   );
-
+  parameters.sender = sender;
   const res: any = {
     from: parameters.sender,
     to: parameters.receiver,

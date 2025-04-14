@@ -12,9 +12,9 @@ export const transferErc721 = async (
     walletClient,
     sender
   );
-
+  parameters.sender = sender;
   const res: any = {
-    from: parameters.sender,
+    from: sender,
     to: parameters.contractAddress,
     data: new AbiFactory({
       ...(parameters as Partial<TokenTransferPayload>),

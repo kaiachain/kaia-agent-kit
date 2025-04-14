@@ -12,7 +12,7 @@ export const transferErc1155 = async (
     walletClient,
     sender
   );
-
+  parameters.sender = sender;
   const res: any = {
     from: parameters.sender,
     to: parameters.contractAddress,
