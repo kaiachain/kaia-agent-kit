@@ -13,15 +13,12 @@ export const transferFaucet = async (
   let KAIROS_FAUCET_AMOUNT =
     config.KAIROS_FAUCET_AMOUNT || DEFAULT_KAIROS_FAUCET_AMOUNT;
 
-  console.log(walletClient);
   const sender = walletClient.address || walletClient.account.address;
 
   const accountType: { accType: number } = await getAccount(
     walletClient,
     sender
   );
-
-  console.log(accountType);
 
   validations.checkAddress(sender);
   validations.checkAddress(parameters.receiver);
@@ -36,11 +33,7 @@ export const transferFaucet = async (
     res.type = TxType.ValueTransfer;
   }
 
-  console.log(res);
-  console.log(walletClient);
-
   const sentTx = await walletClient.sendTransaction(res);
-  console.log(sentTx);
   return {
     transactionHash: sentTx.hash || sentTx,
   };

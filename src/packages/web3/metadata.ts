@@ -2,7 +2,7 @@ import {z} from 'zod';
 import { faucetExamples } from './examples/faucet';
 import { transferExamples } from './examples/transfer';
 
-export const faucetTransfer = {
+export const transferFaucet = {
     name: 'transfer_test_kaia_coins',
     description: 'transfer test kaia coins for a given address',
     params: z.object({
