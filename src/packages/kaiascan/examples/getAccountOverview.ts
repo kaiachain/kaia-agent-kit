@@ -22,7 +22,7 @@ export const getAccountOverviewExamples = [
             user: "{{agent}}",
             content: {
                 text: "Noted, since you didn't provide the network, I'll assume it's kaia mainnet. Let me fetch the details for 0x840e00ffc46734c3ac97b0e88b1589f83b3874ec.",
-                action: "GET_ACCOUNT_OVERVIEW",
+                action: "get_account_overview",
             },
         }
     ],
@@ -49,7 +49,7 @@ export const getAccountOverviewExamples = [
             user: "{{agent}}",
             content: {
                 text: "Let me fetch the details for 0x840e00ffc46734c3ac97b0e88b1589f83b3874ec on kaia mainnet.",
-                action: "GET_ACCOUNT_OVERVIEW",
+                action: "get_account_overview",
             },
         }
     ],
@@ -64,7 +64,7 @@ export const getAccountOverviewExamples = [
             user: "{{agent}}",
             content: {
                 text: "I'll get the account details for 0x840e00ffc46734c3ac97b0e88b1589f83b3874ec on kairos network.",
-                action: "GET_ACCOUNT_OVERVIEW",
+                action: "get_account_overview",
             },
         }
     ],
@@ -91,7 +91,7 @@ export const getAccountOverviewExamples = [
             user: "{{agent}}",
             content: {
                 text: "Fetching the portfolio details for 0x840e00ffc46734c3ac97b0e88b1589f83b3874ec on kairos network.",
-                action: "GET_ACCOUNT_OVERVIEW",
+                action: "get_account_overview",
             },
         }
     ],

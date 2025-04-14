@@ -36,8 +36,10 @@ export class KaiaPlugin extends PluginBase<EVMWalletClient> {
       const metadata: any = pkg.Metadata || {};
 
       for (const [serviceName, serviceFn] of Object.entries(services)) {
+        console.log(serviceFn)
         const meta = metadata[serviceName];
         if (meta) {
+          console.log(meta.name);
           const tool = {
             info: {
               name: meta.name,
@@ -58,7 +60,7 @@ export class KaiaPlugin extends PluginBase<EVMWalletClient> {
         }
       }
     }
-
+console.log(tools)
     return tools;
   }
 }
