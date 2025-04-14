@@ -1,4 +1,4 @@
-import {z} from 'zod';
+import { z } from 'zod';
 import { faucetExamples } from './examples/faucet';
 import { transferExamples } from './examples/transfer';
 

@@ -1,12 +1,12 @@
 import { isKlaytnAccountKeyType, TxType } from "@kaiachain/ethers-ext";
-import { TokenTransferPayload, FaucetTransferPayload } from "../utils/token";
+// import { TokenTransferPayload, FaucetTransferPayload } from "../utils/token";
 import { parseEther } from "viem";
 import validations from "../utils/validations";
 import { getAccount } from "../utils/helper";
 const DEFAULT_KAIROS_FAUCET_AMOUNT = "1"; // in KAIA
 
 export const transferFaucet = async (
-  parameters: FaucetTransferPayload,
+  parameters: any,
   config: any,
   walletClient: any
 ) => {
