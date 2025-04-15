@@ -16,10 +16,10 @@ export const transferFaucet = {
 
 export const transferErc20 = {
     name: 'transfer_erc20',
-    description: 'transfer erc20 token',
+    description: 'transfer erc20 token for a given receiver address and contract address',
     params: z.object({
         receiver: z.string(),
-        amount: z.union([z.string(), z.bigint(), z.number()]),
+        amount: z.number(),
         contractAddress: z.string(),
         network: z.enum(['kaia', 'kairos'])
     }),
@@ -47,7 +47,7 @@ export const transferErc1155 = {
     description: 'transfer erc1155 token',
     params: z.object({
         receiver: z.string(),
-        amount: z.union([z.string(), z.bigint(), z.number()]),
+        amount: z.number(),
         tokenId: z.string(),
         contractAddress: z.string(),
         network: z.enum(['kaia', 'kairos'])
@@ -59,10 +59,10 @@ export const transferErc1155 = {
 
 export const transferNativeToken = {
     name: 'transfer_native_token',
-    description: 'transfer native token',
+    description: 'transfer native token for a given receiver address, amount and network',
     params: z.object({
         receiver: z.string(),
-        amount: z.union([z.string(), z.bigint(), z.number()]),
+        amount: z.number(),
         network: z.enum(['kaia', 'kairos'])
     }),
     similes: ["transfer_native_token"],

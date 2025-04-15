@@ -25,6 +25,7 @@ Thank you for your interest in contributing to this project! This guide will hel
 2. **Add Required Files**: Add the necessary files for the new partner. At a minimum, include:
     - `README.md`: Provide an overview of the partner integration.
     - Any additional files required for the integration.
+    - Make sure metadata.ts has same function names as in each service. Follow kaiascan or web3 package for reference
 
 3. **Follow Code Standards**: Ensure your code adheres to the project's coding standards and conventions.
 

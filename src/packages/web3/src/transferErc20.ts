@@ -1,4 +1,4 @@
-import { AbiFactory, TokenTransferPayload } from "../utils/token.js";
+import { AbiFactory, TokenTransferPayload } from "../utils/token";
 import { isKlaytnAccountKeyType, TxType } from "@kaiachain/ethers-ext";
 import { keccak256 } from "viem";
 import { getAccount } from "../utils/helper";
@@ -19,7 +19,6 @@ async function getContractDecimals(contractAddress: string, walletClient: any) {
 
     const decimals = parseInt(result, 16);
 
-    console.log("Token decimals:", decimals);
     return decimals;
   } catch (err) {
     console.error("Error fetching decimals:", err);
@@ -32,32 +31,42 @@ export const transferErc20 = async (
   config: any,
   walletClient: any
 ) => {
-  const sender = walletClient.address || walletClient.account?.address || walletClient.getAddress();
-  const accountType: { accType: number } = await await getAccount(
-    walletClient,
-    sender
-  );
-  parameters.sender = sender;
-  parameters.amount = await getContractDecimals(
-    parameters.contractAddress,
-    walletClient
-  );
+  try {
+    const sender =
+      walletClient.address ||
+      walletClient.account?.address ||
+      walletClient.getAddress();
+    const accountType: { accType: number } = await await getAccount(
+      walletClient,
+      sender
+    );
+    parameters.sender = sender;
+    parameters.amount = await getContractDecimals(
+      parameters.contractAddress,
+      walletClient
+    );
 
-  const res: any = {
-    from: sender,
-    to: parameters.contractAddress,
-    data: new AbiFactory({
-      ...(parameters as Partial<TokenTransferPayload>),
-      type: "erc20",
-    }).createParams(),
-    type: undefined,
-  };
-  if (isKlaytnAccountKeyType(accountType.accType) && walletClient.provider?.kaia) {
-    res.type = TxType.SmartContractExecution;
+    const res: any = {
+      from: sender,
+      to: parameters.contractAddress,
+      data: new AbiFactory({
+        ...(parameters as Partial<TokenTransferPayload>),
+        type: "erc20",
+      }).createParams(),
+      type: undefined,
+    };
+    if (
+      walletClient.provider?.kaia && isKlaytnAccountKeyType(accountType.accType)
+    ) {
+      res.type = TxType.SmartContractExecution;
+    }
+
+    const sentTx = await walletClient.sendTransaction(res);
+    return {
+      transactionHash: sentTx.hash || sentTx,
+    };
+  } catch (err) {
+    console.log(err);
+    throw err;
   }
-
-  const sentTx = await walletClient.sendTransaction(res);
-  return {
-    transactionHash: sentTx.hash || sentTx,
-  };
 };

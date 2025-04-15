@@ -7,27 +7,37 @@ export const transferErc1155 = async (
   config: any,
   walletClient: any
 ) => {
-  const sender = walletClient.address || walletClient.account?.address || walletClient.getAddress();
-  const accountType: { accType: number } = await await getAccount(
-    walletClient,
-    sender
-  );
-  parameters.sender = sender;
-  const res: any = {
-    from: parameters.sender,
-    to: parameters.contractAddress,
-    data: new AbiFactory({
-      ...(parameters as Partial<TokenTransferPayload>),
-      type: "erc1155",
-    }).createParams(),
-    type: undefined,
-  };
-  if (isKlaytnAccountKeyType(accountType.accType) && walletClient.provider?.kaia) {
-    res.type = TxType.SmartContractExecution;
-  }
+  try {
+    const sender =
+      walletClient.address ||
+      walletClient.account?.address ||
+      walletClient.getAddress();
+    const accountType: { accType: number } = await await getAccount(
+      walletClient,
+      sender
+    );
+    parameters.sender = sender;
+    const res: any = {
+      from: parameters.sender,
+      to: parameters.contractAddress,
+      data: new AbiFactory({
+        ...(parameters as Partial<TokenTransferPayload>),
+        type: "erc1155",
+      }).createParams(),
+      type: undefined,
+    };
+    if (
+      walletClient.provider?.kaia && isKlaytnAccountKeyType(accountType.accType)
+    ) {
+      res.type = TxType.SmartContractExecution;
+    }
 
-  const sentTx = await walletClient.sendTransaction(res);
-  return {
-    transactionHash: sentTx.hash || sentTx,
-  };
+    const sentTx = await walletClient.sendTransaction(res);
+    return {
+      transactionHash: sentTx.hash || sentTx,
+    };
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 };
