@@ -10,32 +10,41 @@ export const transferFaucet = async (
   config: any,
   walletClient: any
 ) => {
-  console.log(parameters, config, walletClient);
-  let KAIROS_FAUCET_AMOUNT =
-    config.KAIROS_FAUCET_AMOUNT || DEFAULT_KAIROS_FAUCET_AMOUNT;
-
-  const sender = walletClient.address || walletClient.account.address;
-
-  const accountType: { accType: number } = await getAccount(
-    walletClient,
-    sender
-  );
-  parameters.sender = sender;
-  validations.checkAddress(sender);
-  validations.checkAddress(parameters.receiver);
-
-  const res: any = {
-    from: sender,
-    to: parameters.receiver,
-    value: parseEther(KAIROS_FAUCET_AMOUNT.toString()),
-    type: undefined,
-  };
-  if (isKlaytnAccountKeyType(accountType.accType) && walletClient.provider?.kaia) {
-    res.type = TxType.ValueTransfer;
+  try {
+    console.log(parameters, config, walletClient);
+    let KAIROS_FAUCET_AMOUNT =
+      config.KAIROS_FAUCET_AMOUNT || DEFAULT_KAIROS_FAUCET_AMOUNT;
+  
+    console.log(walletClient.getAddress());
+    const sender = walletClient.address || walletClient.account?.address || walletClient.getAddress();
+  
+    const accountType: { accType: number } = await getAccount(
+      walletClient,
+      sender
+    );
+    console.log(accountType);
+    parameters.sender = sender;
+    validations.checkAddress(sender);
+    validations.checkAddress(parameters.receiver);
+  
+    const res: any = {
+      from: sender,
+      to: parameters.receiver,
+      value: parseEther(KAIROS_FAUCET_AMOUNT.toString()),
+      type: undefined,
+    };
+    if (walletClient.provider?.kaia && isKlaytnAccountKeyType(accountType?.accType)) {
+      res.type = TxType.ValueTransfer;
+    }
+  
+    const sentTx = await walletClient.sendTransaction(res);
+    console.log(sentTx);
+    return {
+      transactionHash: sentTx.hash || sentTx,
+    };
+  } catch(err) {
+    console.log(err);
+    throw err;
   }
 
-  const sentTx = await walletClient.sendTransaction(res);
-  return {
-    transactionHash: sentTx.hash || sentTx,
-  };
 };

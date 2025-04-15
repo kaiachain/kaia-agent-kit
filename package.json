@@ -1,6 +1,6 @@
 {
   "name": "@kaiachain/kaia-agent-kit",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "One stop solution for all Kaia Ecosystem projects",
   "files": [
     "dist/**/*",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@goat-sdk/core": "0.4.9",
     "@goat-sdk/wallet-evm": "0.2.11",
+    "@goat-sdk/wallet-viem": "^0.2.12",
     "@kaiachain/ethers-ext": "^2.0.3",
     "viem": "^2.23.15",
     "zod": "^3.24.2"

@@ -11,7 +11,7 @@ export const transferNativeToken = async (
   config: any,
   walletClient: any
 ) => {
-  const sender = walletClient.address || walletClient.account.address;
+  const sender = walletClient.address || walletClient.account?.address || walletClient.getAddress();
   const accountType: { accType: number } = await await getAccount(
     walletClient,
     sender

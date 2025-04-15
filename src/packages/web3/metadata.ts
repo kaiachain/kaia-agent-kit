@@ -2,11 +2,12 @@ import { z } from 'zod';
 import { faucetExamples } from './examples/faucet';
 import { transferExamples } from './examples/transfer';
 
+/* Function names are same as the function names in the services.ts file */
 export const transferFaucet = {
     name: 'transfer_test_kaia_coins',
-    description: 'transfer test kaia coins for a given address',
+    description: 'transfer test kaia coins for a given receiver address',
     params: z.object({
-        address: z.string()
+        receiver: z.string()
     }),
     similes: ["transfer_test_kaia_coins"],
     validate: async () => true,

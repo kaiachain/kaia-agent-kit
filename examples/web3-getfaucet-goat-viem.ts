@@ -23,7 +23,7 @@ Packages.web3.Services.transferFaucet(
   {
     KAIROS_FAUCET_AMOUNT: "1",
   },
-  walletClient
+  viem(walletClient)
 ).then((hash: any) => {
   console.log(hash);
 });

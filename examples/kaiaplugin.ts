@@ -8,5 +8,3 @@ const kaia = Kaia({
 });
 
 kaia.getTools();
-
-
