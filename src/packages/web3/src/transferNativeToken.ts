@@ -35,6 +35,7 @@ export const transferNativeToken = async (
     }
 
     const sentTx = await walletClient.sendTransaction(res);
+
     return {
       transactionHash: sentTx.hash || sentTx,
     };

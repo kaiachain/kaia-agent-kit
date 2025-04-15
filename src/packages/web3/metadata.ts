@@ -16,7 +16,7 @@ export const transferFaucet = {
 
 export const transferErc20 = {
     name: 'transfer_erc20',
-    description: 'transfer erc20 token for a given receiver address and contract address',
+    description: 'transfer erc20/FT/Fungible token for a given receiver address, amount and contract address',
     params: z.object({
         receiver: z.string(),
         amount: z.number(),
@@ -30,7 +30,7 @@ export const transferErc20 = {
 
 export const transferErc721 = {
     name: 'transfer_erc721',
-    description: 'transfer erc721 token',
+    description: 'transfer erc721/NFT/NonFungible token for a given receiver address, tokenId and contract address',
     params: z.object({
         receiver: z.string(),
         tokenId: z.string(),
@@ -44,7 +44,7 @@ export const transferErc721 = {
 
 export const transferErc1155 = {
     name: 'transfer_erc1155',
-    description: 'transfer erc1155 token',
+    description: 'transfer erc1155/multi token for a given receiver address, tokenId, amount and contract address',
     params: z.object({
         receiver: z.string(),
         amount: z.number(),

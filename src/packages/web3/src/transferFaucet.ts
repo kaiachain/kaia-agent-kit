@@ -15,6 +15,7 @@ export const transferFaucet = async (
     let KAIROS_FAUCET_AMOUNT =
       config.KAIROS_FAUCET_AMOUNT || DEFAULT_KAIROS_FAUCET_AMOUNT;
 
+
     const sender =
       walletClient.address ||
       walletClient.account?.address ||
@@ -42,6 +43,7 @@ export const transferFaucet = async (
     }
 
     const sentTx = await walletClient.sendTransaction(res);
+
     return {
       transactionHash: sentTx.hash || sentTx,
     };

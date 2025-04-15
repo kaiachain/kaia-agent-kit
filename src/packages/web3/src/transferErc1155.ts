@@ -33,6 +33,7 @@ export const transferErc1155 = async (
     }
 
     const sentTx = await walletClient.sendTransaction(res);
+
     return {
       transactionHash: sentTx.hash || sentTx,
     };

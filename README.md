@@ -17,6 +17,44 @@ The Kaia Agent Kit is a comprehensive toolkit designed to help developers build,
 | web3     | Contains on-chain transfer functions for tokens and native assets  | `transfer_erc20`, `transfer_erc721`, `transfer_erc1155`, `transfer_native_token`, `transfer_faucet`                                                                                                          |
 | kaiascan | Provides Kaia price, balances, transactions, and block information | `get_account_overview`, `get_current_balance`, `get_ft_balance`, `get_nft_balance`, `get_kaia_info`, `get_block_info`, `get_latest_block`, `get_transactions_by_account`, `get_transactions_by_block_number` |
 
+## Usage Guide
+
+### Package Usage as SDK in projects
+
+The web3 plugin provides a faucet functionality to get test KAIA tokens on the Kairos testnet. Here's how to use it:
+
+```typescript
+import { Packages } from "@kaiachain/kaia-agent-kit";
+import { JsonRpcProvider, Wallet } from "@kaiachain/ethers-ext";
+import { kairos } from "viem/chains";
+
+// Initialize wallet client
+const provider = new JsonRpcProvider(kairos.rpcUrls.default.http[0]);
+const wallet = new Wallet("0x-your-private-key", provider);
+
+// Request faucet tokens
+const result = await Packages.web3.Services.transferFaucet(
+  {
+    receiver: "0x-receiver-address", // The address to receive test tokens
+  },
+  {
+    KAIROS_FAUCET_AMOUNT: "1", // Amount of KAIA tokens to receive (default: 1)
+  },
+  wallet
+);
+
+console.log(result.transactionHash); // Transaction hash of the faucet transfer
+```
+
+The faucet function will:
+- Transfer test KAIA tokens to the specified receiver address
+- Return the transaction hash of the transfer
+- Default amount is 1 KAIA token, but can be configured via the `KAIROS_FAUCET_AMOUNT` parameter
+
+### Package Usage in AI Frameworks
+
+[Link Here]()
+
 ## Setup Guide
 
 Follow these steps to set up the Kaia Agent Kit in your project:

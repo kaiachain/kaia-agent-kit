@@ -20,8 +20,9 @@ export class KaiaPlugin extends PluginBase<EVMWalletClient> {
     const config = this.config;
     const packagesEnabled: PackagesEnum[] = (config.packages ||
       []) as PackagesEnum[];
-
+    
     for (const [pkgName, pkg] of Object.entries(Packages)) {
+
       if (
         packagesEnabled.length > 0 &&
         !packagesEnabled.includes(pkgName as PackagesEnum)
@@ -34,8 +35,10 @@ export class KaiaPlugin extends PluginBase<EVMWalletClient> {
       const metadata: any = pkg.Metadata || {};
 
       for (const [serviceName, serviceFn] of Object.entries(services)) {
+
         const meta = metadata[serviceName];
         if (meta) {
+
           const tool = {
             info: {
               name: meta.name,
@@ -56,6 +59,7 @@ export class KaiaPlugin extends PluginBase<EVMWalletClient> {
         }
       }
     }
+
     return tools;
   }
 }

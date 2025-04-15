@@ -4,22 +4,51 @@ import { keccak256 } from "viem";
 import { getAccount } from "../utils/helper";
 
 async function getContractDecimals(contractAddress: string, walletClient: any) {
-  // Step 1: Get the Keccak-256 hash of the function signature
-  const functionSignature = new TextEncoder().encode("decimals()");
-  const functionHash = keccak256(functionSignature);
-
-  // Step 2: First 4 bytes (8 hex chars) → function selector
-  const selector = functionHash.slice(0, 10); // '0x' + 8 char
 
   try {
-    const result = await walletClient.call({
-      to: contractAddress,
-      data: selector,
-    });
+    if (walletClient.call) {
+      // Step 1: Get the Keccak-256 hash of the function signature
+      const functionSignature = new TextEncoder().encode("decimals()");
+      const functionHash = keccak256(functionSignature);
 
-    const decimals = parseInt(result, 16);
+      // Step 2: First 4 bytes (8 hex chars) → function selector
+      const selector = functionHash.slice(0, 10); // '0x' + 8 char
+      const result = await walletClient.call({
+        to: contractAddress,
+        data: selector,
+      });
 
-    return decimals;
+      const decimals = parseInt(result, 16);
+
+      return decimals;
+    } else if (walletClient.read) {
+
+      const result = await walletClient.read({
+        address: contractAddress,
+        abi: [
+          {
+            constant: true,
+            inputs: [],
+            name: "decimals",
+            outputs: [
+              {
+                name: "",
+                type: "uint8",
+              },
+            ],
+            payable: false,
+            stateMutability: "view",
+            type: "function",
+          },
+        ],
+        functionName: "decimals",
+        args: [],
+      });
+      
+      return result?.value || 18;
+    } else {
+      throw new Error("Problem calculating the decimals");
+    }
   } catch (err) {
     console.error("Error fetching decimals:", err);
     throw err;
@@ -56,7 +85,8 @@ export const transferErc20 = async (
       type: undefined,
     };
     if (
-      walletClient.provider?.kaia && isKlaytnAccountKeyType(accountType.accType)
+      walletClient.provider?.kaia &&
+      isKlaytnAccountKeyType(accountType.accType)
     ) {
       res.type = TxType.SmartContractExecution;
     }

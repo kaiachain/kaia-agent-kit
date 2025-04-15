@@ -56,6 +56,7 @@ export class AbiFactory {
       {
         constant: false,
         inputs: [
+          {"name":"from","type":"address"},
           {
             name: "_to",
             type: "address",
@@ -89,24 +90,29 @@ export class AbiFactory {
         constant: false,
         inputs: [
           {
-            name: "_to",
+            name: "from",
             type: "address",
           },
           {
-            name: "_id",
+            name: "to",
+            type: "address",
+          },
+          {
+            name: "id",
             type: "uint256",
           },
           {
-            name: "_value",
+            name: "amount",
             type: "uint256",
           },
           {
-            name: "_data",
+            name: "data",
             type: "bytes",
           },
         ],
         name: "safeTransferFrom",
         outputs: [],
+        stateMutability: "nonpayable",
         type: "function",
       },
     ];
@@ -145,6 +151,7 @@ export class AbiFactory {
     }
     // encode data
     const { abi, args, functionName } = params;
+
     return encodeFunctionData({
       abi,
       functionName,
