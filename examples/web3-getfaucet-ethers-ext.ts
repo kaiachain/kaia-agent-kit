@@ -1,9 +1,7 @@
 import { Packages } from "../src/index";
 
-import { http, createWalletClient } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
 import { kairos, kaia } from "viem/chains";
-import { isKlaytnAccountKeyType, JsonRpcProvider, TxType, Wallet } from "@kaiachain/ethers-ext";
+import { JsonRpcProvider, Wallet } from "@kaiachain/ethers-ext";
 const client = new JsonRpcProvider(kairos.rpcUrls.default.http[0])
 const wallet = new Wallet("0x-your-private-key", client)
 
