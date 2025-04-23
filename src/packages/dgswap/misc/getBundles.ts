@@ -1,6 +1,6 @@
-import { queryGql } from "../utils/gql";
+import { queryGql, gqlParams, populatedGqlParams } from "../utils/gql.js";
 
-const getQueryBundles = ({ count, skip, where }: { count: number; skip: number; where?: object }): [string, object] => [
+const getQueryBundles = ({ count, skip, where }: gqlParams): populatedGqlParams => [
   `
   query getBundles($count: Int!, $skip: Int!, $where: Bundle_filter = {}) {
     bundles(first: $count, skip: $skip, orderBy: id, orderDirection: asc, where: $where) {

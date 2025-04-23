@@ -1,7 +1,7 @@
-import { queryGql, queryGqlInput, queryGqlVariable } from "../utils/gql";
+import { queryGql, gqlParams, populatedGqlParams } from "../utils/gql.js";
 
-const getQueryPositionSnapshots = ({ count, skip, where }: queryGqlInput): queryGqlVariable => [
-    `
+const getQueryPositionSnapshots = ({ count, skip, where }: gqlParams): populatedGqlParams => [
+  `
   query MyQuery($count: Int!, $skip: Int!, $where: PositionSnapshot_filter = {}) {
     positionSnapshots(first: $count, skip: $skip, orderBy: id, orderDirection: asc, where: $where) {
       blockNumber
@@ -23,14 +23,14 @@ const getQueryPositionSnapshots = ({ count, skip, where }: queryGqlInput): query
     }
   }
   `,
-    { count, skip, where }
+  { count, skip, where }
 ];
 
 export const getPositionSnapshots = async (
-    count: number,
-    skip: number,
-    where: object = {}
+  count: number,
+  skip: number,
+  where: object = {}
 ) => {
-    const { positionSnapshots = [] } = await queryGql(...getQueryPositionSnapshots({ count, skip, where }));
-    return positionSnapshots;
+  const { positionSnapshots = [] } = await queryGql(...getQueryPositionSnapshots({ count, skip, where }));
+  return positionSnapshots;
 };

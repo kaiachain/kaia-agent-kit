@@ -1,4 +1,4 @@
-import { queryGql, queryGqlInput, queryGqlVariable } from "../utils/gql";
+import { queryGql, gqlParams, populatedGqlParams } from "../utils/gql.js";
 
 
 
@@ -6,7 +6,7 @@ const getQueryTicks = ({
     count,
     skip,
     where,
-}: queryGqlInput): queryGqlVariable => [
+}: gqlParams): populatedGqlParams => [
         `
   query MyQuery($count: Int!, $skip: Int!, $where: Tick_filter = {}) {
     ticks(

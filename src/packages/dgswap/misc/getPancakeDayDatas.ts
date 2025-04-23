@@ -1,14 +1,10 @@
-import { queryGql } from "../utils/gql";
+import { gqlParams, populatedGqlParams, queryGql } from "../utils/gql.js";
 
 const getQueryPancakeDayDatas = ({
   count,
   skip,
   where,
-}: {
-  count: number;
-  skip: number;
-  where?: object;
-}): [string, object] => [
+}: gqlParams): populatedGqlParams => [
     `
   query MyQuery($count: Int!, $skip: Int!, $where: PancakeDayData_filter = {}) {
     pancakeDayDatas(

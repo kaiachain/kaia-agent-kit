@@ -1,6 +1,6 @@
-import { queryGql, queryGqlInput, queryGqlVariable } from "../utils/gql";
+import { queryGql, gqlParams, populatedGqlParams } from "../utils/gql.js";
 
-const getQueryPools = ({ count, skip, where }: queryGqlInput): queryGqlVariable => [
+const getQueryPools = ({ count, skip, where }: gqlParams): populatedGqlParams => [
   `
   query GetPools($count: Int!, $skip: Int!, $where: Pool_filter = {}) {
     pools(first: $count, skip: $skip, where: $where) {
@@ -28,7 +28,7 @@ const getQueryPools = ({ count, skip, where }: queryGqlInput): queryGqlVariable 
   { count, skip, where }
 ];
 
-export const getPools = async (params: queryGqlInput) => {
+export const getPools = async (params: gqlParams) => {
   const { pools = [] } = await queryGql(...getQueryPools(params));
   return pools;
 };

@@ -1,11 +1,11 @@
-import { queryGql, queryGqlInput, queryGqlVariable } from "../utils/gql";
+import { queryGql, gqlParams, populatedGqlParams } from "../utils/gql.js";
 
 
 const getQueryTokens = ({
     count,
     skip,
     where,
-}: queryGqlInput): queryGqlVariable => [
+}: gqlParams): populatedGqlParams => [
         `
   query MyQuery($count: Int!, $skip: Int!, $where: Token_filter = {}) {
     tokens(

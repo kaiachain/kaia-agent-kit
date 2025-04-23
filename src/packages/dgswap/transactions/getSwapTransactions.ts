@@ -1,6 +1,6 @@
-import { queryGql } from "../utils/gql";
+import { gqlParams, populatedGqlParams, queryGql } from "../utils/gql.js";
 
-const getQuerySwapsTransactions = ({ count, skip, where }: { count: number; skip: number; where?: object }): [string, object] => [
+const getQuerySwapsTransactions = ({ count, skip, where }: gqlParams): populatedGqlParams => [
   `
   query getSwapsTx($count: Int!, $skip: Int!, $where: Swap_filter = {}) {
     swaps(first: $count, skip: $skip, where: $where) {

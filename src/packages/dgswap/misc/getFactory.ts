@@ -1,6 +1,6 @@
-import { queryGql } from "../utils/gql";
+import { gqlParams, populatedGqlParams, queryGql } from "../utils/gql.js";
 
-const getQueryFactories = ({ count, skip, where }: { count: number, skip: number, where?: object }): [string, object] => [`
+const getQueryFactories = ({ count, skip, where }: gqlParams): populatedGqlParams => [`
   query MyQuery($count:Int!,$skip:Int!,$where: Factory_filter = {}) {
   factories(where: $where, first: $count, orderBy: id, orderDirection: asc, skip: $skip) {
   id

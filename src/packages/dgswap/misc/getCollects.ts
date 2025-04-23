@@ -1,7 +1,7 @@
-import { queryGql } from "../utils/gql";
+import { gqlParams, populatedGqlParams, queryGql } from "../utils/gql.js";
 
-const getQueryCollects = ({ count, skip, where }: { count: number; skip: number; where?: object }): [string, object] => [
-    `
+const getQueryCollects = ({ count, skip, where }: gqlParams): populatedGqlParams => [
+  `
   query getCollects($count: Int!, $skip: Int!, $where: Collect_filter = {}) {
     collects(first: $count, skip: $skip, orderBy: id, orderDirection: asc, where: $where) {
       id
@@ -22,14 +22,14 @@ const getQueryCollects = ({ count, skip, where }: { count: number; skip: number;
     }
   }
   `,
-    { count, skip, where }
+  { count, skip, where }
 ];
 
 export const getCollects = async (
-    count: number,
-    skip: number,
-    where: object = {}
+  count: number,
+  skip: number,
+  where: object = {}
 ) => {
-    const { collects = [] } = await queryGql(...getQueryCollects({ count, skip, where }));
-    return collects;
+  const { collects = [] } = await queryGql(...getQueryCollects({ count, skip, where }));
+  return collects;
 };

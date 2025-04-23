@@ -1,11 +1,11 @@
-import { queryGql, queryGqlInput, queryGqlVariable } from "../utils/gql";
+import { queryGql, gqlParams, populatedGqlParams } from "../utils/gql.js";
 
 const getQueryPoolHourDatas = ({
-    count,
-    skip,
-    where,
-}: queryGqlInput): queryGqlVariable => [
-        `
+  count,
+  skip,
+  where,
+}: gqlParams): populatedGqlParams => [
+    `
   query MyQuery($count: Int!, $skip: Int!, $where: PoolHourData_filter = {}) {
     poolHourDatas(
       first: $count,
@@ -40,16 +40,16 @@ const getQueryPoolHourDatas = ({
     }
   }
   `,
-        { count, skip, where },
-    ];
+    { count, skip, where },
+  ];
 
 export const getPoolHourDatas = async (
-    count: number,
-    skip: number,
-    where: object = {}
+  count: number,
+  skip: number,
+  where: object = {}
 ) => {
-    const { poolHourDatas = [] } = await queryGql(
-        ...getQueryPoolHourDatas({ count, skip, where })
-    );
-    return poolHourDatas;
+  const { poolHourDatas = [] } = await queryGql(
+    ...getQueryPoolHourDatas({ count, skip, where })
+  );
+  return poolHourDatas;
 };

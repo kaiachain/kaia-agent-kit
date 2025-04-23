@@ -1,6 +1,6 @@
-import { queryGql } from "../utils/gql";
+import { gqlParams, populatedGqlParams, queryGql } from "../utils/gql.js";
 
-const getQueryMintsTransactions = ({ count, skip, where }: { count: number; skip: number; where?: object }): [string, object] => [
+const getQueryMintsTransactions = ({ count, skip, where }: gqlParams): populatedGqlParams => [
   `
   query getMintsTx($count: Int!, $skip: Int!, $where: Mint_filter = {}) {
     mints(first: $count, skip: $skip, orderBy: id, orderDirection: asc, where: $where) {

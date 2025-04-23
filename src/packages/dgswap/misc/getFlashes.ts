@@ -1,7 +1,7 @@
-import { queryGql } from "../utils/gql";
+import { gqlParams, populatedGqlParams, queryGql } from "../utils/gql.js";
 
-const getQueryFlashes = ({ count, skip, where }: { count: number; skip: number; where?: object }): [string, object] => [
-    `
+const getQueryFlashes = ({ count, skip, where }: gqlParams): populatedGqlParams => [
+  `
   query getFlashes($count: Int!, $skip: Int!, $where: Flash_filter = {}) {
     flashes(first: $count, skip: $skip, orderBy: id, orderDirection: asc, where: $where) {
       amount0
@@ -23,14 +23,14 @@ const getQueryFlashes = ({ count, skip, where }: { count: number; skip: number; 
     }
   }
   `,
-    { count, skip, where }
+  { count, skip, where }
 ];
 
 export const getFlashes = async (
-    count: number,
-    skip: number,
-    where: object = {}
+  count: number,
+  skip: number,
+  where: object = {}
 ) => {
-    const { flashes = [] } = await queryGql(...getQueryFlashes({ count, skip, where }));
-    return flashes;
+  const { flashes = [] } = await queryGql(...getQueryFlashes({ count, skip, where }));
+  return flashes;
 };

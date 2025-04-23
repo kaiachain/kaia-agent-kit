@@ -1,6 +1,6 @@
-import { queryGql } from "../utils/gql";
+import { gqlParams, populatedGqlParams, queryGql } from "../utils/gql.js";
 
-const getQueryTokenDayDatas = ({ count, skip, where }: { count: number; skip: number; where?: object }): [string, object] => [
+const getQueryTokenDayDatas = ({ count, skip, where }: gqlParams): populatedGqlParams => [
   `
   query TokenDayDatas($count: Int!, $skip: Int!, $where: TokenDayData_filter = {}) {
     tokenDayDatas(first: $count, skip: $skip, where: $where) {
