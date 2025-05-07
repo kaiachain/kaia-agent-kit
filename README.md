@@ -17,6 +17,24 @@ The Kaia Agent Kit is a comprehensive toolkit designed to help developers build,
 | web3     | Contains on-chain transfer functions for tokens and native assets  | `transfer_erc20`, `transfer_erc721`, `transfer_erc1155`, `transfer_native_token`, `transfer_faucet`                                                                                                          |
 | kaiascan | Provides Kaia price, balances, transactions, and block information | `get_account_overview`, `get_current_balance`, `get_ft_balance`, `get_nft_balance`, `get_kaia_info`, `get_block_info`, `get_latest_block`, `get_transactions_by_account`, `get_transactions_by_block_number` |
 
+## Environment Variables
+
+This project uses environment variables for configuration. Create a `.env` file in the root directory based on the `.env.example` template:
+
+```
+# Wallet
+PRIVATE_KEY=0x-your-private-key
+
+# API endpoints
+KAIROS_RPC_URL=https://public-en-kairos.node.kaia.io
+
+# Faucet settings
+KAIROS_FAUCET_AMOUNT=1
+RECEIVER_ADDRESS=0xe45CEA5135167451e16175f7B58E9912CF1d8b63
+```
+
+Make sure to replace the placeholder values with your own.
+
 ## Usage Guide
 
 ### Package Usage as SDK in projects
@@ -27,18 +45,22 @@ The web3 plugin provides a faucet functionality to get test KAIA tokens on the K
 import { Packages } from "@kaiachain/kaia-agent-kit";
 import { JsonRpcProvider, Wallet } from "@kaiachain/ethers-ext";
 import { kairos } from "viem/chains";
+import dotenv from "dotenv";
+
+// Load environment variables
+dotenv.config();
 
 // Initialize wallet client
-const provider = new JsonRpcProvider(kairos.rpcUrls.default.http[0]);
-const wallet = new Wallet("0x-your-private-key", provider);
+const provider = new JsonRpcProvider(process.env.KAIROS_RPC_URL || kairos.rpcUrls.default.http[0]);
+const wallet = new Wallet(process.env.PRIVATE_KEY || "", provider);
 
 // Request faucet tokens
 const result = await Packages.web3.Services.transferFaucet(
   {
-    receiver: "0x-receiver-address", // The address to receive test tokens
+    receiver: process.env.RECEIVER_ADDRESS || "", // The address to receive test tokens
   },
   {
-    KAIROS_FAUCET_AMOUNT: "1", // Amount of KAIA tokens to receive (default: 1)
+    KAIROS_FAUCET_AMOUNT: process.env.KAIROS_FAUCET_AMOUNT || "1", // Amount of KAIA tokens to receive (default: 1)
   },
   wallet
 );
@@ -80,7 +102,14 @@ Follow these steps to set up the Kaia Agent Kit in your project:
     pnpm install
     ```
 
-3. **Build:**
+3. **Configure environment:**
+
+    ```bash
+    cp .env.example .env
+    # Edit .env with your values
+    ```
+
+4. **Build:**
 
     ```bash
     pnpm build

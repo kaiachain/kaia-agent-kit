@@ -1,27 +1,29 @@
 import { Packages } from "../src/index";
-
 import { http, createWalletClient } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { kairos, kaia } from "viem/chains";
 import { viem } from "@goat-sdk/wallet-viem";
+import dotenv from "dotenv";
+
+// Load environment variables
+dotenv.config();
 
 const account = privateKeyToAccount(
-  "0x-your-private-key"
+  process.env.PRIVATE_KEY as `0x${string}` || "0x0000000000000000000000000000000000000000000000000000000000000000"
 );
 
 const walletClient = createWalletClient({
   account: account,
-  transport: http("https://public-en-kairos.node.kaia.io"),
+  transport: http(process.env.KAIROS_RPC_URL || "https://public-en-kairos.node.kaia.io"),
   chain: kairos,
 });
 
 Packages.web3.Services.transferFaucet(
   {
-    receiver:
-      "0xe45CEA5135167451e16175f7B58E9912CF1d8b63",
+    receiver: process.env.RECEIVER_ADDRESS || "",
   },
   {
-    KAIROS_FAUCET_AMOUNT: "1",
+    KAIROS_FAUCET_AMOUNT: process.env.KAIROS_FAUCET_AMOUNT || "1",
   },
   walletClient
 ).then((hash: any) => {

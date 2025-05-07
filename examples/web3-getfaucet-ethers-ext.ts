@@ -1,17 +1,20 @@
 import { Packages } from "../src/index";
-
 import { kairos, kaia } from "viem/chains";
 import { JsonRpcProvider, Wallet } from "@kaiachain/ethers-ext";
-const client = new JsonRpcProvider(kairos.rpcUrls.default.http[0])
-const wallet = new Wallet("0x-your-private-key", client)
+import dotenv from "dotenv";
+
+// Load environment variables
+dotenv.config();
+
+const client = new JsonRpcProvider(process.env.KAIROS_RPC_URL || kairos.rpcUrls.default.http[0]);
+const wallet = new Wallet(process.env.PRIVATE_KEY || "", client);
 
 Packages.web3.Services.transferFaucet(
   {
-    receiver:
-      "0xe45CEA5135167451e16175f7B58E9912CF1d8b63",
+    receiver: process.env.RECEIVER_ADDRESS || "",
   },
   {
-    KAIROS_FAUCET_AMOUNT: "1",
+    KAIROS_FAUCET_AMOUNT: process.env.KAIROS_FAUCET_AMOUNT || "1",
   },
   wallet
 ).then((hash: any) => {
