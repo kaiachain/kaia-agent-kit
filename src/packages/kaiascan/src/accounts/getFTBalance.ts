@@ -25,18 +25,18 @@ export const getFTBalance = async (parameters: any, config: any) => {
 
   const data = await response.json();
 
-  const totalCount = data.paging.total_count;
-  let responseText: string = `Your account has ${totalCount} FTs. They are as follows:\n`;
+  const tokens = data.results.map((item: any) => ({
+    contractAddress: item.contract.contract_address,
+    symbol: item.contract.symbol,
+    name: item.contract.name,
+    totalSupply: item.contract.total_supply,
+    balance: item.balance
+  }));
 
-  data.results.forEach((item: any, index: number) => {
-    responseText += `${index + 1}. Contract address = ${
-      item.contract.contract_address
-    } | symbol = ${item.contract.symbol} | name = ${
-      item.contract.name
-    } | total supply = ${item.contract.total_supply} | balance = ${
-      item.balance
-    }\n`;
-  });
-
-  return responseText;
+  return {
+    address,
+    network,
+    tokens,
+    totalCount: data.paging.total_count
+  };
 };

@@ -25,14 +25,15 @@ export const getNFTBalance = async (parameters: any, config: any) => {
 
   const data = await response.json();
 
-  const totalCount = data.paging.total_count;
-  let responseText = `Your account has ${totalCount} NFT Collections. They are as follows:\n`;
+  const collections = data.results.map((item: any) => ({
+    contractAddress: item.contract.contract_address,
+    tokenCount: item.token_count
+  }));
 
-  data.results.forEach((item: any, index: number) => {
-    responseText += `${index + 1}. Contract address - ${
-      item.contract.contract_address
-    } | Token count - ${item.token_count}\n`;
-  });
-
-  return responseText;
+  return {
+    address,
+    network,
+    collections,
+    totalCount: data.paging.total_count
+  };
 };

@@ -25,11 +25,10 @@ export const getAccountOverview = async (parameters: any, config: any) => {
 
   const data = await response.json();
 
-  let responseText = `Here are the details \nAccount Details:\n`;
-  responseText += `Address: ${data.address}\n`;
-  responseText += `Account Type: ${data.account_type}\n`;
-  responseText += `Balance: ${data.balance}\n`;
-  responseText += `Total Transaction Count: ${data.total_transaction_count}\n`;
-
-  return responseText;
+  return {
+    address: data.address,
+    accountType: data.account_type,
+    balance: data.balance,
+    totalTransactionCount: data.total_transaction_count
+  };
 };

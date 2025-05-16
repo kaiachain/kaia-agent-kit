@@ -21,13 +21,12 @@ export const getKaiaInfo = async (parameters: any, config: any) => {
 
   const data = await response.json();
 
-  let responseText = `Kaia Token Info:\n`;
-  responseText += `- USD Price: ${data.klay_price.usd_price}\n`;
-  responseText += `- BTC Price: ${data.klay_price.btc_price}\n`;
-  responseText += `- USD Price Changes: ${data.klay_price.usd_price_changes}\n`;
-  responseText += `- Market Cap: ${data.klay_price.market_cap}\n`;
-  responseText += `- Total Supply: ${data.klay_price.total_supply}\n`;
-  responseText += `- Volume: ${data.klay_price.volume}\n`;
-
-  return responseText;
+  return {
+    usdPrice: data.klay_price.usd_price,
+    btcPrice: data.klay_price.btc_price,
+    usdPriceChanges: data.klay_price.usd_price_changes,
+    marketCap: data.klay_price.market_cap,
+    totalSupply: data.klay_price.total_supply,
+    volume: data.klay_price.volume
+  };
 };

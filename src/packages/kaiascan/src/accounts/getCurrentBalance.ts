@@ -28,12 +28,12 @@ export const getCurrentBalance = async (parameters: any, config: any) => {
 
     const data = await response.json();
 
-    let responseText = `The current balance of ${address} is ${
-      data.balance
-    } KAIA on ${String(network)} network`;
-
-    return responseText;
+    return {
+      address,
+      balance: data.balance,
+      network
+    };
   } catch (error: any) {
-    return `Failed to fetch current balance : ${error.message}`;
+    throw new Error(`Failed to fetch current balance: ${error.message}`);
   }
 };
