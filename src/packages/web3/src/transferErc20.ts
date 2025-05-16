@@ -55,6 +55,27 @@ async function getContractDecimals(contractAddress: string, walletClient: any) {
   }
 }
 
+// Function to format amount based on token decimals
+function formatTokenAmount(amount: string | number | bigint, decimals: number): bigint {
+  // Convert amount to string to handle all input types consistently
+  const amountStr = amount.toString();
+  
+  // Check if amount already includes decimal point
+  if (amountStr.includes('.')) {
+    // Split by decimal point
+    const [integerPart, fractionalPart] = amountStr.split('.');
+    
+    // Pad the fractional part with zeros if needed
+    const paddedFractionalPart = fractionalPart.padEnd(decimals, '0').slice(0, decimals);
+    
+    // Combine and convert to bigint
+    return BigInt(integerPart + paddedFractionalPart);
+  } else {
+    // No decimal point, just multiply by 10^decimals
+    return BigInt(amountStr) * BigInt(10) ** BigInt(decimals);
+  }
+}
+
 export const transferErc20 = async (
   parameters: Omit<TokenTransferPayload, "type" | "tokenId">,
   config: any,
@@ -65,15 +86,20 @@ export const transferErc20 = async (
       walletClient.address ||
       walletClient.account?.address ||
       walletClient.getAddress();
-    const accountType: { accType: number } = await await getAccount(
+    const accountType: { accType: number } = await getAccount(
       walletClient,
       sender
     );
     parameters.sender = sender;
-    parameters.amount = await getContractDecimals(
+    
+    // Get the token decimals
+    const decimals = await getContractDecimals(
       parameters.contractAddress,
       walletClient
     );
+    
+    // Format the amount based on token decimals
+    parameters.amount = formatTokenAmount(parameters.amount, decimals);
 
     const res: any = {
       from: sender,
@@ -92,8 +118,10 @@ export const transferErc20 = async (
     }
 
     const sentTx = await walletClient.sendTransaction(res);
+    const transactionHash = sentTx.hash || sentTx;
     return {
-      transactionHash: sentTx.hash || sentTx,
+      transactionHash,
+      url: `https://kairos.kaiascan.io/tx/${transactionHash}`
     };
   } catch (err) {
     console.log(err);
