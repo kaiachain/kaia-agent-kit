@@ -24,6 +24,8 @@ export const getLatestBlock = async (parameters: any, config: any) => {
 
   const data = await response.json();
 
-  let responseText = `The latest block number of ${network} is ${data.block_id}`;
-  return responseText;
+  return {
+    blockId: data.block_id,
+    network: network
+  };
 };

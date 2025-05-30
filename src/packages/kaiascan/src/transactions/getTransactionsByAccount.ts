@@ -28,22 +28,20 @@ export const getTransactionsByAccount = async (
 
   const data = await response.json();
 
-  let accountTransactions = "";
-  if (data && data.results.length > 0) {
-    data.results.map((transaction: any, index: number) => {
-      if (index > 5) return;
-      accountTransactions += ` ----------------------------------- \n`;
-      accountTransactions += `${index + 1}:\n`;
-      accountTransactions += `from: ${transaction.from},\n`;
-      accountTransactions += `to: ${transaction.to}, \n`;
-      accountTransactions += `value: ${transaction.amount}, \n`;
-      accountTransactions += `type: ${transaction.transaction_type}, \n`;
-      accountTransactions += `hash: ${transaction.transaction_hash}\n`;
-    });
-  } else {
-    accountTransactions = "No transactions found for this address";
-  }
+  const transactions = data && data.results.length > 0 
+    ? data.results.slice(0, 6).map((transaction: any) => ({
+        from: transaction.from,
+        to: transaction.to,
+        value: transaction.amount,
+        type: transaction.transaction_type,
+        hash: transaction.transaction_hash
+      }))
+    : [];
 
-  let responseText = `The transactions for ${address} account on ${network} is ${accountTransactions}`;
-  return responseText;
+  return {
+    address,
+    network,
+    transactions,
+    totalCount: data.paging?.total_count || 0
+  };
 };

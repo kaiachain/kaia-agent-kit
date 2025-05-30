@@ -1,17 +1,19 @@
 import { Packages } from "../src/index";
+import 'dotenv/config';
 
 import { http, createWalletClient } from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import { kairos, kaia } from "viem/chains";
 import { viem } from "@goat-sdk/wallet-viem";
 
-const account = privateKeyToAccount(
-  "0x-your-private-key"
-);
+const privateKey = process.env.WALLET_PRIVATE_KEY || "";
+// Ensure the key has the correct format (0x prefix) and proper type
+const formattedKey = privateKey.startsWith('0x') ? privateKey as `0x${string}` : `0x${privateKey}` as `0x${string}`;
+const account = privateKeyToAccount(formattedKey);
 
 const walletClient = createWalletClient({
   account: account,
-  transport: http("https://public-en-kairos.node.kaia.io"),
+  transport: http(process.env.RPC_PROVIDER_URL || "https://public-en-kairos.node.kaia.io"),
   chain: kairos,
 });
 

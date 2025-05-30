@@ -1,6 +1,9 @@
 import { z } from 'zod';
 import { faucetExamples } from './examples/faucet';
-import { transferExamples } from './examples/transfer';
+import { transferERC20Examples } from './examples/transferErc20';
+import { transferERC721Examples } from './examples/transferErc721';
+import { transferERC1155Examples } from './examples/transferErc1155';
+import { transferExamples } from './examples/transferNativeToken';
 
 /* Function names are same as the function names in the services.ts file */
 export const transferFaucet = {

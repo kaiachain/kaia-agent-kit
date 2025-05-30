@@ -27,22 +27,20 @@ export const getTransactionsByBlockNumber = async (
 
   const data = await response.json();
 
-  let blockTransactions = "";
-  if (data && data.results.length > 0) {
-    data.results.map((transaction: any, index: any) => {
-      if (index > 5) return;
-      blockTransactions += ` ----------------------------------- \n`;
-      blockTransactions += `${index + 1}:\n`;
-      blockTransactions += `from: ${transaction.from},\n`;
-      blockTransactions += `to: ${transaction.to}, \n`;
-      blockTransactions += `value: ${transaction.amount}, \n`;
-      blockTransactions += `type: ${transaction.transaction_type}, \n`;
-      blockTransactions += `hash: ${transaction.transaction_hash}\n`;
-    });
-  } else {
-    blockTransactions = "No transactions found for this block";
-  }
+  const transactions = data && data.results.length > 0 
+    ? data.results.slice(0, 6).map((transaction: any) => ({
+        from: transaction.from,
+        to: transaction.to,
+        value: transaction.amount,
+        type: transaction.transaction_type,
+        hash: transaction.transaction_hash
+      }))
+    : [];
 
-  let responseText = `The transactions in a block for ${blockNumber} on ${network} is ${blockTransactions}`;
-  return responseText;
+  return {
+    blockNumber,
+    network,
+    transactions,
+    totalCount: data.paging?.total_count || 0
+  };
 };

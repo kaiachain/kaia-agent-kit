@@ -24,11 +24,11 @@ export const getBlockInfo = async (parameters: any, config: any) => {
 
   const data = await response.json();
 
-  let blockInfo = `Block Number: ${data.block_id}\n`;
-  blockInfo += `Block Time: ${data.datetime}\n`;
-  blockInfo += `Block Hash: ${data.hash}\n`;
-  blockInfo += `Total Transaction Count: ${data.total_transaction_count}`;
-
-  let responseText = `The block info for ${blockNumber} on ${network} is ${blockInfo}`;
-  return responseText;
+  return {
+    blockId: data.block_id,
+    datetime: data.datetime,
+    hash: data.hash,
+    totalTransactionCount: data.total_transaction_count,
+    network: network
+  };
 };
