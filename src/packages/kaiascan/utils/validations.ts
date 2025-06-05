@@ -1,4 +1,4 @@
-import { isAddress } from "viem";
+import { isAddress } from "viem/utils";
 
 let validations: any = {};
 
@@ -13,7 +13,7 @@ validations.checkAddress = (address: any) => {
 };
 
 validations.checkNetwork = (network: any) => {
-  if (network !== "kairos" && network !== "kaia") {
+  if (network !== "kairos" || network !== "kaia") {
     throw new Error("Invalid network");
   }
 };
